@@ -8,33 +8,47 @@ class HistoryPage extends StatelessWidget {
     return Scaffold(
       body: Column(
         children: [
-          // 🔵 TOP BLUE CURVED HEADER
+          // 🔵 TOP BLUE CURVED HEADER WITH BACK BUTTON
           Container(
-            height: 95,
+            height: 90,
             width: double.infinity,
             decoration: const BoxDecoration(
               color: Color(0xFF3FA9F5),
               borderRadius: BorderRadius.only(
-                bottomLeft: Radius.circular(25),
-                bottomRight: Radius.circular(25),
+                bottomLeft: Radius.circular(30),
+                bottomRight: Radius.circular(30),
               ),
             ),
-            alignment: Alignment.center,
-            child: const Padding(
-              padding: EdgeInsets.only(top: 30),
-              child: Text(
-                'Appointment History',
-                style: TextStyle(
-                  color: Colors.white,
-                  fontSize: 20,
-                  fontWeight: FontWeight.bold,
-                ),
+            child: Padding(
+              padding: const EdgeInsets.only(top: 30, left: 8, right: 16),
+              child: Row(
+                children: [
+                  // 🔙 BACK BUTTON
+                  IconButton(
+                    icon: const Icon(Icons.arrow_back, color: Colors.white),
+                    onPressed: () {
+                      Navigator.pop(context);
+                    },
+                  ),
+
+                  const SizedBox(width: 10),
+
+                  // 📄 TITLE
+                  const Text(
+                    'Appointment History',
+                    style: TextStyle(
+                      color: Colors.white,
+                      fontSize: 20,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                ],
               ),
             ),
           ),
 
           // ⬜ REST PAGE BLANK
-          Expanded(child: SizedBox()),
+          const Expanded(child: SizedBox()),
         ],
       ),
     );

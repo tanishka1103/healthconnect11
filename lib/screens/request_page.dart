@@ -9,7 +9,7 @@ class RequestPage extends StatefulWidget {
 }
 
 class _RequestPageState extends State<RequestPage> {
-  bool showRequest = true; // 🔹 controls visibility
+  bool showRequest = true;
 
   @override
   Widget build(BuildContext context) {
@@ -20,72 +20,76 @@ class _RequestPageState extends State<RequestPage> {
       ),
       body: Padding(
         padding: const EdgeInsets.all(16),
-
         child: showRequest
-            ? Container(
-                padding: const EdgeInsets.all(16),
-                decoration: BoxDecoration(
-                  color: Colors.red,
-                  borderRadius: BorderRadius.circular(12),
-                ),
-
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    const Text(
-                      "Patient:",
-                      style: TextStyle(
-                        fontWeight: FontWeight.bold,
-                        fontSize: 16,
-                      ),
+            ? Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Container(
+                    width: double.infinity,
+                    padding: const EdgeInsets.all(14),
+                    decoration: BoxDecoration(
+                      color: const Color.fromARGB(255, 228, 213, 213),
+                      borderRadius: BorderRadius.circular(12),
                     ),
-                    const SizedBox(height: 6),
-                    const Text("Problem:"),
-                    const Text("Time:"),
-                    const Text("Distance:"),
-
-                    const SizedBox(height: 20),
-
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    child: Column(
+                      mainAxisSize: MainAxisSize.min, // ⭐ keeps box small
+                      crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        ElevatedButton(
-                          style: ElevatedButton.styleFrom(
-                            backgroundColor: Colors.green,
+                        const Text(
+                          "Patient:",
+                          style: TextStyle(
+                            fontWeight: FontWeight.bold,
+                            fontSize: 16,
                           ),
-                          onPressed: () {
-                            Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                builder: (context) =>
-                                    const PatientDetailsPage(),
-                              ),
-                            );
-                          },
-                          child: const Text("Accept"),
                         ),
+                        const SizedBox(height: 6),
+                        const Text("Problem:"),
+                        const Text("Time:"),
+                        const Text("Distance:"),
 
-                        ElevatedButton(
-                          style: ElevatedButton.styleFrom(
-                            backgroundColor: Colors.red.shade700,
-                          ),
-                          onPressed: () {
-                            setState(() {
-                              showRequest = false; // ❌ delete card
-                            });
-                          },
-                          child: const Text("Reject"),
+                        const SizedBox(height: 12),
+
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            ElevatedButton(
+                              style: ElevatedButton.styleFrom(
+                                backgroundColor: Colors.green,
+                                minimumSize: const Size(90, 36),
+                              ),
+                              onPressed: () {
+                                Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                    builder: (context) =>
+                                        const PatientDetailsPage(),
+                                  ),
+                                );
+                              },
+                              child: const Text("Accept"),
+                            ),
+                            ElevatedButton(
+                              style: ElevatedButton.styleFrom(
+                                backgroundColor: const Color.fromARGB(255, 193, 89, 89),
+                                minimumSize: const Size(90, 36),
+                              ),
+                              onPressed: () {
+                                setState(() {
+                                  showRequest = false;
+                                });
+                              },
+                              child: const Text("Reject"),
+                            ),
+                          ],
                         ),
                       ],
                     ),
-                  ],
-                ),
+                  ),
+                ],
               )
-            : const Center(
-                child: Text(
-                  "No Requests Available",
-                  style: TextStyle(fontSize: 16),
-                ),
+            : const Text(
+                "No Requests Available",
+                style: TextStyle(fontSize: 16),
               ),
       ),
     );

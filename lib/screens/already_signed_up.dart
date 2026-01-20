@@ -18,11 +18,12 @@ class AlreadySignedUpPage extends StatelessWidget {
               left: 0,
               right: 0,
               child: Container(
-                height: 120,
+                height: 90,
                 decoration: const BoxDecoration(
                   color: Color(0xFF42A5F5),
                   borderRadius: BorderRadius.only(
-                    bottomLeft: Radius.circular(80),
+                    bottomLeft: Radius.circular(30),
+                    bottomRight: Radius.circular(30)
                   ),
                 ),
                 padding: const EdgeInsets.only(left: 20, top: 20),
@@ -43,11 +44,12 @@ class AlreadySignedUpPage extends StatelessWidget {
               left: 0,
               right: 0,
               child: Container(
-                height: 100,
+                height: 60,
                 decoration: const BoxDecoration(
                   color: Color(0xFF6EC6FF),
                   borderRadius: BorderRadius.only(
-                    topRight: Radius.circular(80),
+                    topRight: Radius.circular(30),
+                    topLeft: Radius.circular(30),
                   ),
                 ),
               ),
@@ -118,7 +120,7 @@ class AlreadySignedUpPage extends StatelessWidget {
                           Navigator.push(
                             context,
                             MaterialPageRoute(
-                              builder: (context) => const SignupPage(),
+                              builder: (context) => SignupPage(),
                             ),
                           );
 

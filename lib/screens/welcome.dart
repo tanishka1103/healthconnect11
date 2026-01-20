@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:healthconnect/screens/already_signed_up.dart';
-
+import 'forgot_password_page.dart';
 class WelcomePage extends StatelessWidget {
   const WelcomePage({super.key});
 
@@ -33,7 +33,7 @@ class WelcomePage extends StatelessWidget {
               left: 0,
               right: 0,
               child: Container(
-                height: 120,
+                height: 90,
                 decoration: const BoxDecoration(
                   color: Color(0xFF6EC6FF),
                   borderRadius: BorderRadius.only(
@@ -92,6 +92,8 @@ class WelcomePage extends StatelessWidget {
                       ),
                     ),
                   ),
+
+ 
 
                   const SizedBox(height: 40),
 

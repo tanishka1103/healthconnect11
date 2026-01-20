@@ -1,170 +1,178 @@
 import 'package:flutter/material.dart';
 import 'package:healthconnect/screens/doctor_personal_details.dart';
-import 'home_page.dart';
 
 class SignupPage extends StatelessWidget {
-  const SignupPage({super.key});
+  SignupPage({super.key});
+
+  // 🔑 Form key
+  final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
+
+  // Controllers
+  final TextEditingController emailController = TextEditingController();
+  final TextEditingController passwordController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.white,
       body: SingleChildScrollView(
-        child: Column(
-          children: [
-            // 🔵 TOP BLUE CURVE
-            Container(
-              height: 160,
-              width: double.infinity,
-              decoration: const BoxDecoration(
-                color: Color(0xFF4AAFFF),
-                borderRadius: BorderRadius.only(
-                  bottomLeft: Radius.circular(60),
-                  bottomRight: Radius.circular(60),
-                ),
-              ),
-              alignment: Alignment.topLeft,
-              padding: const EdgeInsets.only(top: 50, left: 20),
-              child: const Text(
-                "HealthConnect",
-                style: TextStyle(
-                  color: Colors.white,
-                  fontSize: 18,
-                  fontWeight: FontWeight.bold,
-                ),
-              ),
-            ),
-
-            const SizedBox(height: 40),
-
-            // 🟦 TITLE
-            const Text(
-              "Welcome!",
-              style: TextStyle(
-                fontSize: 26,
-                fontWeight: FontWeight.bold,
-                color: Color(0xFF007BFF),
-              ),
-            ),
-
-            const SizedBox(height: 8),
-
-            const Text(
-              "Create your account",
-              style: TextStyle(color: Colors.grey),
-            ),
-
-            const SizedBox(height: 30),
-
-            // 📧 EMAIL
-            _inputField("Email"),
-
-            const SizedBox(height: 15),
-
-            // 🔒 PASSWORD
-            _inputField("Password", isPassword: true),
-
-            // 🔗 FORGOT PASSWORD
-            Padding(
-              padding: const EdgeInsets.only(right: 30, top: 8),
-              child: Align(
-                alignment: Alignment.centerRight,
-                child: Text(
-                  "Forgot Password",
-                  style: TextStyle(color: Colors.blue.shade600, fontSize: 12),
-                ),
-              ),
-            ),
-
-            const SizedBox(height: 25),
-
-            // 🔵 SIGN UP BUTTON
-            ElevatedButton(
-              onPressed: () {
-                Navigator.pushReplacement(
-                  context,
-                  MaterialPageRoute(builder: (context) => const HomePage()),
-                );
-
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) => const DoctorPersonalDetails(),
+        child: Form(
+          key: _formKey,
+          child: Column(
+            children: [
+              // 🔵 TOP BLUE CURVE WITH BACK ARROW
+              Container(
+                height: 90,
+                width: double.infinity,
+                decoration: const BoxDecoration(
+                  color: Color(0xFF4AAFFF),
+                  borderRadius: BorderRadius.only(
+                    bottomLeft: Radius.circular(60),
+                    bottomRight: Radius.circular(60),
                   ),
-                );
-              },
-
-              style: ElevatedButton.styleFrom(
-                backgroundColor: const Color(0xFF007BFF),
-                padding: const EdgeInsets.symmetric(
-                  horizontal: 80,
-                  vertical: 15,
                 ),
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(30),
-                ),
-              ),
-              child: const Text(
-                "Sign Up",
-                style: TextStyle(fontSize: 16, color: Colors.white),
-              ),
-            ),
-
-            const SizedBox(height: 25),
-
-            // ➖ OR SIGN UP WITH
-            Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: const [
-                Expanded(child: Divider(indent: 40, endIndent: 10)),
-                Text("Or sign up with"),
-                Expanded(child: Divider(indent: 10, endIndent: 40)),
-              ],
-            ),
-
-            const SizedBox(height: 20),
-
-            // 🌐 SOCIAL ICONS
-            Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                _socialIcon(Icons.g_mobiledata),
-                _socialIcon(Icons.facebook),
-                _socialIcon(Icons.apple),
-              ],
-            ),
-
-            const SizedBox(height: 30),
-
-            // 🟦 BOTTOM CURVE
-            Container(
-              height: 120,
-              width: double.infinity,
-              decoration: const BoxDecoration(
-                color: Color(0xFF4AAFFF),
-                borderRadius: BorderRadius.only(
-                  topLeft: Radius.circular(60),
-                  topRight: Radius.circular(60),
+                padding: const EdgeInsets.only(top: 45, left: 10, right: 25),
+                child: Row(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    IconButton(
+                      icon: const Icon(
+                        Icons.arrow_back_ios_new,
+                        color: Colors.white,
+                        size: 22,
+                      ),
+                      onPressed: () {
+                        Navigator.pop(context);
+                      },
+                    ),
+                    const SizedBox(width: 8),
+                    const Text(
+                      "HealthConnect",
+                      style: TextStyle(
+                        color: Colors.white,
+                        fontSize: 18,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                  ],
                 ),
               ),
-            ),
-          ],
+
+              const SizedBox(height: 40),
+
+              // 🟦 TITLE
+              const Text(
+                "Welcome!",
+                style: TextStyle(
+                  fontSize: 26,
+                  fontWeight: FontWeight.bold,
+                  color: Color(0xFF007BFF),
+                ),
+              ),
+
+              const SizedBox(height: 8),
+
+              const Text(
+                "Create your account",
+                style: TextStyle(color: Colors.grey),
+              ),
+
+              const SizedBox(height: 30),
+
+              // 📧 EMAIL FIELD
+              _inputField(
+                hint: "Email",
+                controller: emailController,
+                validator: (value) {
+                  if (value == null || value.isEmpty) {
+                    return "Email is required";
+                  }
+                  if (!RegExp(r'^[\w-\.]+@([\w-]+\.)+[\w]{2,4}')
+                      .hasMatch(value)) {
+                    return "Enter valid email";
+                  }
+                  return null;
+                },
+              ),
+
+              const SizedBox(height: 15),
+
+              // 🔒 PASSWORD FIELD
+              _inputField(
+                hint: "Password",
+                controller: passwordController,
+                isPassword: true,
+                validator: (value) {
+                  if (value == null || value.isEmpty) {
+                    return "Password is required";
+                  }
+                  if (value.length < 6) {
+                    return "Password must be at least 6 characters";
+                  }
+                  return null;
+                },
+              ),
+
+              const SizedBox(height: 30),
+
+              // 🔵 SIGN UP BUTTON
+              ElevatedButton(
+                onPressed: () {
+                  if (_formKey.currentState!.validate()) {
+                    // ✅ All validations passed
+                    Navigator.pushReplacement(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) =>
+                            const DoctorPersonalDetails(),
+                      ),
+                    );
+                  }
+                },
+                style: ElevatedButton.styleFrom(
+                  backgroundColor: const Color(0xFF007BFF),
+                  padding: const EdgeInsets.symmetric(
+                    horizontal: 80,
+                    vertical: 15,
+                  ),
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(30),
+                  ),
+                ),
+                child: const Text(
+                  "Sign Up",
+                  style: TextStyle(fontSize: 16, color: Colors.white),
+                ),
+              ),
+
+              const SizedBox(height: 80),
+            ],
+          ),
         ),
       ),
     );
   }
 
-  // 🔹 INPUT FIELD WIDGET
-  static Widget _inputField(String hint, {bool isPassword = false}) {
+  // 🔹 INPUT FIELD WITH VALIDATION
+  Widget _inputField({
+    required String hint,
+    required TextEditingController controller,
+    bool isPassword = false,
+    String? Function(String?)? validator,
+  }) {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 30),
-      child: TextField(
+      child: TextFormField(
+        controller: controller,
         obscureText: isPassword,
+        validator: validator,
+        style: const TextStyle(color: Colors.white),
         decoration: InputDecoration(
           hintText: hint,
           filled: true,
           fillColor: const Color(0xFF00A3FF),
           hintStyle: const TextStyle(color: Colors.white),
+          errorStyle: const TextStyle(color: Colors.redAccent),
           contentPadding: const EdgeInsets.symmetric(
             horizontal: 20,
             vertical: 14,
@@ -174,19 +182,6 @@ class SignupPage extends StatelessWidget {
             borderSide: BorderSide.none,
           ),
         ),
-        style: const TextStyle(color: Colors.white),
-      ),
-    );
-  }
-
-  // 🔹 SOCIAL ICON WIDGET
-  static Widget _socialIcon(IconData icon) {
-    return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 10),
-      child: CircleAvatar(
-        radius: 24,
-        backgroundColor: Colors.white,
-        child: Icon(icon, size: 28),
       ),
     );
   }
