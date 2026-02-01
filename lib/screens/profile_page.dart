@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'welcome.dart';
+import 'package:healthconnect/screens/already_signed_up.dart';
+import 'already_signed_up.dart';
 import 'edit_profile_page.dart';
 
 class ProfilePage extends StatefulWidget {
@@ -28,10 +29,7 @@ class _ProfilePageState extends State<ProfilePage> {
           color: Colors.grey.shade300,
           borderRadius: BorderRadius.circular(6),
         ),
-        child: Text(
-          text,
-          style: const TextStyle(fontSize: 15),
-        ),
+        child: Text(text, style: const TextStyle(fontSize: 15)),
       ),
     );
   }
@@ -58,10 +56,7 @@ class _ProfilePageState extends State<ProfilePage> {
               child: Row(
                 children: [
                   IconButton(
-                    icon: const Icon(
-                      Icons.arrow_back,
-                      color: Colors.white,
-                    ),
+                    icon: const Icon(Icons.arrow_back, color: Colors.white),
                     onPressed: () => Navigator.pop(context),
                   ),
                   const SizedBox(width: 8),
@@ -127,10 +122,7 @@ class _ProfilePageState extends State<ProfilePage> {
                           ),
                         ),
                         IconButton(
-                          icon: const Icon(
-                            Icons.edit,
-                            color: Colors.blue,
-                          ),
+                          icon: const Icon(Icons.edit, color: Colors.blue),
                           onPressed: () async {
                             final result = await Navigator.push(
                               context,
@@ -169,10 +161,7 @@ class _ProfilePageState extends State<ProfilePage> {
 
                   const Text(
                     "Education & Qualification",
-                    style: TextStyle(
-                      fontWeight: FontWeight.bold,
-                      fontSize: 16,
-                    ),
+                    style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
                   ),
 
                   const SizedBox(height: 10),
@@ -188,27 +177,30 @@ class _ProfilePageState extends State<ProfilePage> {
                     height: 45,
                     child: ElevatedButton(
                       style: ElevatedButton.styleFrom(
-                        backgroundColor:
-                            const Color.fromARGB(255, 71, 145, 223),
+                        backgroundColor: const Color.fromARGB(
+                          255,
+                          71,
+                          145,
+                          223,
+                        ),
                       ),
                       onPressed: () {
                         Navigator.pushAndRemoveUntil(
                           context,
                           MaterialPageRoute(
-                            builder: (_) => const WelcomePage(),
+                            builder: (_) => const AlreadySignedUpPage(),
                           ),
                           (route) => false,
                         );
                       },
-                     child: const Text(
-  "Logout",
-  style: TextStyle(
-    fontSize: 16,
-    color: Colors.white,
-    fontWeight: FontWeight.w600,
-  ),
-),
-
+                      child: const Text(
+                        "Logout",
+                        style: TextStyle(
+                          fontSize: 16,
+                          color: Colors.white,
+                          fontWeight: FontWeight.w600,
+                        ),
+                      ),
                     ),
                   ),
 

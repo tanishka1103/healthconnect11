@@ -15,8 +15,17 @@ class _RequestPageState extends State<RequestPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text("Requests"),
         backgroundColor: Colors.blue,
+        iconTheme: const IconThemeData(
+          color: Colors.white, // ← back arrow white
+        ),
+        title: const Text(
+          "Requests",
+          style: TextStyle(
+            color: Colors.white, // ← title white
+            fontWeight: FontWeight.bold,
+          ),
+        ),
       ),
       body: Padding(
         padding: const EdgeInsets.all(16),
@@ -32,7 +41,7 @@ class _RequestPageState extends State<RequestPage> {
                       borderRadius: BorderRadius.circular(12),
                     ),
                     child: Column(
-                      mainAxisSize: MainAxisSize.min, // ⭐ keeps box small
+                      mainAxisSize: MainAxisSize.min,
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         const Text(
@@ -70,7 +79,12 @@ class _RequestPageState extends State<RequestPage> {
                             ),
                             ElevatedButton(
                               style: ElevatedButton.styleFrom(
-                                backgroundColor: const Color.fromARGB(255, 193, 89, 89),
+                                backgroundColor: const Color.fromARGB(
+                                  255,
+                                  193,
+                                  89,
+                                  89,
+                                ),
                                 minimumSize: const Size(90, 36),
                               ),
                               onPressed: () {
@@ -87,9 +101,11 @@ class _RequestPageState extends State<RequestPage> {
                   ),
                 ],
               )
-            : const Text(
-                "No Requests Available",
-                style: TextStyle(fontSize: 16),
+            : const Center(
+                child: Text(
+                  "No Requests Available",
+                  style: TextStyle(fontSize: 16),
+                ),
               ),
       ),
     );
